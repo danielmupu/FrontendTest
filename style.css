@@ -1,0 +1,76 @@
+body {
+    background-color: rgb(240,240,240);
+}
+
+#mainForm {
+  	background-color: white;
+  	font-family: Calibri;
+    margin: auto;
+    margin-top: 10px;
+    width: 30%;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 20px grey;	
+}
+
+#inputTextField {
+	
+    border-radius: 5px;
+    margin-left: 50px;
+   	margin-bottom: 15px;
+ 	width: 50%;
+
+}
+
+#submitButton {
+	
+    font-weight: bold;
+	width: 20%;
+	margin: auto;
+    border-radius: 5px;
+   
+}
+
+#profileImage {
+	width: 100px;
+	height: 100px;
+	float: left;
+	border-radius: 5px;
+	padding-left: 50px;
+	padding-right: 10px;
+}
+
+#profileUsername {
+	font-family: Calibri;
+	font-style: italic;
+
+}
+
+#profileCompleteName {
+	font-weight: bold;
+	font-size: 150%;
+	padding: 10px;
+}	
+
+#reposList {
+	width: 100%;
+	margin-top: 15px;
+	font-weight: bold;	
+	display: none;
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+td { 
+	border: 1px solid #CCC; 
+	padding-left: 15px;
+	background: #F3F3F3; 
+}
+
+#errorDiv {
+	background-color: rgb(255,160,160);
+	border-radius: 5px;
+	text-align: center;
+	margin-top: -20px;	
+    
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Frontend Test</title>
+    <script>
+	
+	function resetData() { 
+	
+		document.getElementById('profileImage').style.display = "none";
+		document.getElementById('profileUsername').innerHTML = "";
+		document.getElementById('profileCompleteName').innerHTML = "";
+		document.getElementById('profileBio').innerHTML = "";
+		document.getElementById('reposList').innerHTML = "";
+		document.getElementById('errorDiv').innerHTML = "";
+	
+	}
+
+    function onClick() {
+		var profileRequest = new XMLHttpRequest();
+		var reposRequest = new XMLHttpRequest();
+		var profileData = "";
+		var reposData = "";
+		var username = document.getElementById('inputTextField').value;
+		var reposList = "";
+		
+		document.getElementById('errorDiv').style.display = "none";
+		document.getElementById('reposList').style.display = "none";
+
+		profileRequest.open("GET", "https://api.github.com/users/" + username, true);
+		reposRequest.open("GET", "https://api.github.com/users/" + username + "/repos", true);
+
+		profileRequest.onload = function(eventHandler) {
+			if (profileRequest.readyState === 4){
+				if (profileRequest.status === 200){
+					profileData = JSON.parse(profileRequest.responseText);
+					
+	    			(profileData.login) ? document.getElementById('profileUsername').innerHTML = "@" + profileData.login : document.getElementById('profileUsername').innerHTML = ""; 
+					(profileData.name) ? document.getElementById('profileCompleteName').innerHTML = profileData.name : document.getElementById('profileCompleteName').innerHTML = "<br>"; 
+					(profileData.bio) ? document.getElementById('profileBio').innerHTML = profileData.bio : document.getElementById('profileBio').innerHTML = "No biography included...";
+					(profileData.avatar_url) ? document.getElementById('profileImage').src = profileData.avatar_url : document.getElementById('profileImage').src = "";
+
+					document.getElementById('profileImage').style.display = "block";
+
+				} else {
+					console.error(profileRequest.statusText);
+					resetData();
+					document.getElementById('errorDiv').style.display = "block";
+					document.getElementById('errorDiv').innerHTML = "Does not exist."
+				}
+			}
+		}
+
+		profileRequest.onerror = function (eventHandler){
+			console.error(profileRequest.statusText);
+		}
+
+		reposRequest.onload = function(eventHandler) {
+			if (reposRequest.readyState === 4){
+				if (reposRequest.status === 200){
+
+					reposData = JSON.parse(reposRequest.responseText);
+					document.getElementById('reposList').style.display = "table";
+
+					if(reposData.length > 0) {
+						
+						document.getElementById('reposList').innerHTML = "";
+						
+    					row = document.getElementById('reposList').insertRow(0);
+    					row.insertCell(0).innerHTML = "Repositories";
+    					row.insertCell(1).innerHTML = "Stars";
+    					row.insertCell(2).innerHTML = "Forks";
+    					
+						for (var i = 0; i < reposData.length; i++) {
+								row = document.getElementById('reposList').insertRow(i+1);
+    							row.insertCell(0).innerHTML = reposData[i].name;
+    							row.insertCell(1).innerHTML = reposData[i].stargazers_count;
+    							row.insertCell(2).innerHTML = reposData[i].forks;
+						}	
+
+					} else {
+						document.getElementById('reposList').innerHTML = "No repositories published yet...";
+					}
+				} else {
+					console.error(reposRequest.statusText);
+				}
+			}
+		}
+
+		reposRequest.onerror = function (eventHandler){
+			console.error(reposRequest.statusText);
+		}
+
+		profileRequest.send();		
+		reposRequest.send();
+	}
+
+    </script>
+</head>
+
+<body>
+
+<div id="mainForm">
+	<input type="text" name="user" id="inputTextField" placeholder="Search username...">
+	<button onclick="onClick()" id="submitButton">Search</button>
+
+	<img id="profileImage"></img>
+	<div id="profileUsername"></div> 
+	<div id="profileCompleteName"></div> 
+	<div id="profileBio"></div>
+	<table id="reposList"></table>
+	<div id="errorDiv"></div>
+</div>
+			
+</body>
+</html>
+
