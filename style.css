@@ -1,13 +1,13 @@
 body {
-    background-color: rgb(240,240,240);
+	background-color: rgb(240,240,240);
 }
 
 #mainForm {
-  	background-color: white;
-  	font-family: Calibri;
-    margin: auto;
-    margin-top: 10px;
-    width: 30%;
+	background-color: white;
+	font-family: Calibri;
+	margin: auto;
+	margin-top: 10px;
+	width: 30%;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 10px 10px 20px grey;	
@@ -15,19 +15,19 @@ body {
 
 #inputTextField {
 	
-    border-radius: 5px;
-    margin-left: 50px;
-   	margin-bottom: 15px;
- 	width: 50%;
+	border-radius: 5px;
+	margin-left: 50px;
+	margin-bottom: 15px;
+	width: 50%;
 
 }
 
 #submitButton {
 	
-    font-weight: bold;
+	font-weight: bold;
 	width: 20%;
 	margin: auto;
-    border-radius: 5px;
+	border-radius: 5px;
    
 }
 
